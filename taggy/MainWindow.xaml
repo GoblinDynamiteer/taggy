@@ -8,7 +8,8 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <TextBox x:Name="textboxTagInfo" HorizontalAlignment="Left" Height="245" Margin="27,40,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="132"/>
-        <Button x:Name="btnOpenFile" Content="Open File" HorizontalAlignment="Left" Height="50" Margin="215,105,0,0" VerticalAlignment="Top" Width="140" Click="btnOpenFile_Click"/>
+        <Button x:Name="btnOpenFile" Content="Open File" HorizontalAlignment="Left" Height="50" Margin="174,235,0,0" VerticalAlignment="Top" Width="140" Click="btnOpenFile_Click"/>
+        <ListBox x:Name="listFiles" HorizontalAlignment="Left" Height="231" Margin="341,54,0,0" VerticalAlignment="Top" Width="147"/>
 
     </Grid>
 </Window>

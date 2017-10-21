@@ -1,5 +1,5 @@
-﻿using Microsoft.Win32;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Forms;
 
 namespace taggy
 {
@@ -8,6 +8,8 @@ namespace taggy
     /// </summary>
     public partial class MainWindow : Window
     {
+        MusicFolder musicFolder;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -16,37 +18,19 @@ namespace taggy
 
         private void btnOpenFile_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "FLAC Files (*.flac)|*.flac|MP3 Files (*.mp3)|*.mp3|All files (*.*)|*.*";
+            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
 
-            if (openFileDialog.ShowDialog() == true)
+            if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                try
+                musicFolder = new MusicFolder(folderDialog.SelectedPath);
+
+                string[] files = musicFolder.GetMusicFileNames();
+
+                for (int i = 0; i < files.Length; i++)
                 {
-                    var file = TagLib.File.Create(openFileDialog.FileName);
-                    var year = file.Tag.Year;
-                    var track = file.Tag.Track;
-                    var title = file.Tag.Title;
-                    var artist = file.Tag.FirstArtist;
-                    var album = file.Tag.Album;
-
-                    textboxTagInfo.Clear();
-                    textboxTagInfo.AppendText(
-                        year.ToString() + "\r\n" +
-                        title.ToString() + "\r\n" +
-                        track.ToString() + "\r\n" +
-                        album.ToString() + "\r\n" +
-                        artist.ToString() + "\r\n"
-                        );
-
-                    file.Save();
-                }
-
-                catch
-                {
+                    listFiles.Items.Add(files[i]);
                 }
             }
-
         }
     }
 }
